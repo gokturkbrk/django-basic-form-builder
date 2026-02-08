@@ -1,0 +1,88 @@
+[project]
+name = "django-formbuilder"
+version = "0.1.0"
+description = "Reusable Django app for building JSON-driven forms via the admin"
+requires-python = ">=3.12"
+readme = "README.md"
+authors = [
+    { name = "Göktürk Burak Köse", email = "[EMAIL_ADDRESS]" }
+]
+license = "MIT"
+dependencies = [
+    "django>=5.1,<5.2",
+    "djangorestframework>=3.15.0",
+    "psycopg[binary]>=3.2.0",
+    "nh3>=0.3.2",
+    "drf-spectacular>=0.29.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-django>=4.8.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.5.0",
+    "mypy>=1.11.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "formbuilder_test_site.settings"
+python_files = "tests.py test_*.py *_tests.py"
+pythonpath = [
+    ".",
+]
+testpaths = [
+    "formbuilder/tests",
+]
+addopts = "-ra -vv --cov=formbuilder --cov-report=term-missing"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "DJ",  # flake8-django
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "DJ001", # avoid null on string fields (we want nulls in some cases)
+    "DJ012", # model method order - clean() before save() is acceptable
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports in __init__.py
+"*/migrations/*" = ["E501", "N806"]  # ignore long lines and naming in migrations
+"*/tests/*" = ["B011"]  # allow assert False
+
+[tool.ruff.lint.isort]
+known-first-party = ["formbuilder", "formbuilder_test_site"]
+
+[tool.setuptools.packages.find]
+include = ["formbuilder*"]
+exclude = ["docker*", "formbuilder_test_site*"]
+
+
+[tool.uv]
+python-preference = "managed"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.1",
+    "pytest-django>=4.11.1",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.14.7",
+]

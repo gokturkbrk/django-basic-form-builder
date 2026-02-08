@@ -1,0 +1,138 @@
+/* FormBuilder Admin Styles */
+
+/* Position update visual feedback */
+.position-updated {
+    background-color: #ffffcc !important;
+    transition: background-color 0.8s ease-out;
+}
+
+/* Visual separation between stacked inline items */
+.inline-related {
+    margin-bottom: 25px !important;
+    padding: 20px !important;
+    border: 3px solid #417690 !important;
+    border-radius: 8px !important;
+    background-color: #f8f9fa !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Header styling */
+.inline-related h3 {
+    background: linear-gradient(135deg, #417690 0%, #2c5369 100%) !important;
+    color: white !important;
+    padding: 12px 15px !important;
+    margin: -20px -20px 20px -20px !important;
+    border-radius: 5px 5px 0 0 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+/* Make accordion toggle button MUCH more obvious */
+.inline-related h3 .inline-deletelink {
+    order: 2 !important;
+}
+
+.collapse-toggle {
+    background-color: white !important;
+    border: 2px solid white !important;
+    border-radius: 4px !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    margin-left: 10px !important;
+    transition: all 0.2s ease !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #417690 !important;
+}
+
+.collapse-toggle:hover {
+    background-color: #e8f4f8 !important;
+    transform: scale(1.1) !important;
+}
+
+.collapse-toggle::before {
+    content: '▼' !important;
+    display: block !important;
+}
+
+.collapsed .collapse-toggle::before {
+    content: '▶' !important;
+}
+
+/* Make the entire header row clickable */
+.inline-related h3 {
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+.inline-related h3:hover {
+    background: linear-gradient(135deg, #4a8aa8 0%, #355d79 100%) !important;
+}
+
+/* Hide empty form template */
+.inline-related.empty-form {
+    display: none !important;
+}
+
+/* Better spacing for collapsed sections */
+.inline-related fieldset.collapse {
+    margin-top: 15px !important;
+}
+
+.inline-related fieldset.collapse.collapsed {
+    display: none !important;
+}
+
+/* Style the fieldset headers */
+.inline-related fieldset h2 {
+    background-color: #e8f4f8 !important;
+    padding: 8px 12px !important;
+    margin: 15px 0 10px 0 !important;
+    border-left: 4px solid #417690 !important;
+    font-size: 13px !important;
+    color: #2c5369 !important;
+    cursor: pointer !important;
+}
+
+.inline-related fieldset h2:hover {
+    background-color: #d4e9f2 !important;
+}
+
+/* Add icons to collapsed/expanded fieldsets */
+.inline-related fieldset.collapsed h2::before {
+    content: '▶ ' !important;
+    color: #417690 !important;
+    font-size: 11px !important;
+    margin-right: 5px !important;
+}
+
+.inline-related fieldset:not(.collapsed) h2::before {
+    content: '▼ ' !important;
+    color: #417690 !important;
+    font-size: 11px !important;
+    margin-right: 5px !important;
+}
+
+/* Improve form field spacing */
+.inline-related .form-row {
+    margin-bottom: 12px !important;
+}
+
+/* Add FORM FIELDS header styling */
+.inline-group h2 {
+    background: linear-gradient(135deg, #417690 0%, #2c5369 100%) !important;
+    color: white !important;
+    padding: 12px 15px !important;
+    border-radius: 5px !important;
+    margin-bottom: 20px !important;
+    font-size: 16px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}

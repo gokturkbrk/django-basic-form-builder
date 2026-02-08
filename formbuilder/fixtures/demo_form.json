@@ -1,0 +1,322 @@
+[
+    {
+        "model": "formbuilder.customform",
+        "pk": 1,
+        "fields": {
+            "name": "Contact Demo",
+            "slug": "contact-demo",
+            "description": "Demo form shipped with django-formbuilder showcasing all field types",
+            "status": "published",
+            "json_schema": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 1,
+        "fields": {
+            "custom_form": 1,
+            "label": "Full Name",
+            "slug": "full_name",
+            "question": "What is your full name?",
+            "field_type": "text",
+            "position": 1,
+            "required": true,
+            "help_text": "As shown on your ID",
+            "placeholder": "Jane Doe",
+            "default_value": "",
+            "config": {
+                "minLength": 2,
+                "maxLength": 120,
+                "inputMode": "text"
+            },
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 2,
+        "fields": {
+            "custom_form": 1,
+            "label": "Email",
+            "slug": "email",
+            "question": "What is your email address? We'll use this to send you updates.",
+            "field_type": "email",
+            "position": 2,
+            "required": true,
+            "help_text": "We will never share your email",
+            "placeholder": "jane@example.com",
+            "default_value": "",
+            "config": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 3,
+        "fields": {
+            "custom_form": 1,
+            "label": "Age",
+            "slug": "age",
+            "question": "How old are you?",
+            "field_type": "number",
+            "position": 3,
+            "required": false,
+            "help_text": "Optional",
+            "placeholder": "25",
+            "default_value": "",
+            "config": {
+                "min": 0,
+                "max": 120,
+                "step": 1
+            },
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 4,
+        "fields": {
+            "custom_form": 1,
+            "label": "Department",
+            "slug": "department",
+            "question": "Which department would you like to contact?",
+            "field_type": "dropdown",
+            "position": 4,
+            "required": true,
+            "help_text": "Select the relevant department",
+            "placeholder": "Choose department",
+            "default_value": "",
+            "config": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 1,
+        "fields": {
+            "field": 4,
+            "value": "sales",
+            "label": "Sales Team",
+            "position": 1,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 2,
+        "fields": {
+            "field": 4,
+            "value": "support",
+            "label": "Customer Support",
+            "position": 2,
+            "is_default": true
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 3,
+        "fields": {
+            "field": 4,
+            "value": "billing",
+            "label": "Billing Department",
+            "position": 3,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 5,
+        "fields": {
+            "custom_form": 1,
+            "label": "Contact Method",
+            "slug": "contact_method",
+            "question": "How would you prefer to be contacted?",
+            "field_type": "radio",
+            "position": 5,
+            "required": true,
+            "help_text": "Select one option",
+            "placeholder": "",
+            "default_value": "",
+            "config": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 4,
+        "fields": {
+            "field": 5,
+            "value": "email",
+            "label": "Email",
+            "position": 1,
+            "is_default": true
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 5,
+        "fields": {
+            "field": 5,
+            "value": "phone",
+            "label": "Phone Call",
+            "position": 2,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 6,
+        "fields": {
+            "field": 5,
+            "value": "text",
+            "label": "Text Message",
+            "position": 3,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 6,
+        "fields": {
+            "custom_form": 1,
+            "label": "Interests",
+            "slug": "interests",
+            "question": "What topics are you interested in? (Select all that apply)",
+            "field_type": "checkbox",
+            "position": 6,
+            "required": false,
+            "help_text": "Choose one or more",
+            "placeholder": "",
+            "default_value": "",
+            "config": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 7,
+        "fields": {
+            "field": 6,
+            "value": "products",
+            "label": "Product Updates",
+            "position": 1,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 8,
+        "fields": {
+            "field": 6,
+            "value": "news",
+            "label": "Company News",
+            "position": 2,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.fieldoption",
+        "pk": 9,
+        "fields": {
+            "field": 6,
+            "value": "events",
+            "label": "Events & Webinars",
+            "position": 3,
+            "is_default": false
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 7,
+        "fields": {
+            "custom_form": 1,
+            "label": "Service Rating",
+            "slug": "service_rating",
+            "question": "How would you rate our service?",
+            "field_type": "rating",
+            "position": 7,
+            "required": true,
+            "help_text": "1 star = Poor, 5 stars = Excellent",
+            "placeholder": "",
+            "default_value": "",
+            "config": {
+                "scale": 5,
+                "style": "stars"
+            },
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 8,
+        "fields": {
+            "custom_form": 1,
+            "label": "Subscribe",
+            "slug": "subscribe",
+            "question": "Would you like to subscribe to our newsletter?",
+            "field_type": "boolean",
+            "position": 8,
+            "required": false,
+            "help_text": "You can unsubscribe at any time",
+            "placeholder": "",
+            "default_value": "",
+            "config": {
+                "trueLabel": "Yes, subscribe me",
+                "falseLabel": "No, thanks"
+            },
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 9,
+        "fields": {
+            "custom_form": 1,
+            "label": "Preferred Date",
+            "slug": "preferred_date",
+            "question": "When would you like us to contact you?",
+            "field_type": "date",
+            "position": 9,
+            "required": false,
+            "help_text": "Select a date",
+            "placeholder": "",
+            "default_value": "",
+            "config": {},
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "formbuilder.formfield",
+        "pk": 10,
+        "fields": {
+            "custom_form": 1,
+            "label": "Message",
+            "slug": "message",
+            "question": "Tell us more about your inquiry",
+            "field_type": "textarea",
+            "position": 10,
+            "required": true,
+            "help_text": "Please provide details",
+            "placeholder": "Type your message here...",
+            "default_value": "",
+            "config": {
+                "rows": 5,
+                "minLength": 10,
+                "maxLength": 1000
+            },
+            "created_at": "2025-01-01T00:00:00Z",
+            "updated_at": "2025-01-01T00:00:00Z"
+        }
+    }
+]
