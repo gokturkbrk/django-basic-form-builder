@@ -216,9 +216,9 @@ Returned from `/api/forms/<slug>/` when the form status is `published`.
 | `text` | `minLength`, `maxLength`, `pattern`, `inputMode`, `prefix`, `suffix` | Single-line text input |
 | `number` | `min`, `max`, `step`, `prefix`, `suffix`, `unit` | Numeric input with validation |
 | `textarea` | `rows`, `minLength`, `maxLength`, `autoResize` | Multi-line text input |
-| `dropdown` | `allowMultiple`, `allowOther` | Options managed via FieldOption model (inline editor) |
-| `radio` | `allowOther` | Single selection, options via FieldOption model |
-| `checkbox` | `minSelections`, `maxSelections`, `allowOther` | Multiple selections, options via FieldOption model |
+| `dropdown` | `allowMultiple`, `allowOther`, `options`, `defaultOption` | Options managed via FieldOption model (inline editor) |
+| `radio` | `allowOther`, `options`, `defaultOption` | Single selection, options via FieldOption model |
+| `checkbox` | `minSelections`, `maxSelections`, `allowOther`, `options`, `defaultOption` | Multiple selections, options via FieldOption model |
 | `rating` | `scale` (5 or 10), `style` (stars/numeric/emoji), `minLabel`, `maxLabel` | Rating scale input |
 | `boolean` | `trueLabel`, `falseLabel`, `style` | Yes/No or True/False |
 | `email` | `confirmEmail` | Email with validation |

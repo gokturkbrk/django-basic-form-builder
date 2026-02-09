@@ -31,6 +31,7 @@ class TextareaFieldConfig(TypedDict, total=False):
 class DropdownOption(TypedDict):
     value: str
     label: str
+    isDefault: bool
 
 
 class DropdownFieldConfig(TypedDict, total=False):
@@ -40,10 +41,69 @@ class DropdownFieldConfig(TypedDict, total=False):
     defaultOption: str | list[str]
 
 
-FieldTypeLiteral = Literal["text", "number", "textarea", "dropdown"]
+class RadioFieldConfig(TypedDict, total=False):
+    options: list[DropdownOption]
+    allowOther: bool
+    defaultOption: str
 
 
-FieldConfig = TextFieldConfig | NumberFieldConfig | TextareaFieldConfig | DropdownFieldConfig
+class CheckboxFieldConfig(TypedDict, total=False):
+    options: list[DropdownOption]
+    allowOther: bool
+    minSelections: int
+    maxSelections: int
+    defaultOption: list[str]
+
+
+class RatingFieldConfig(TypedDict, total=False):
+    scale: int
+    style: Literal["stars", "numeric", "emoji"]
+    minLabel: str
+    maxLabel: str
+
+
+class BooleanFieldConfig(TypedDict, total=False):
+    trueLabel: str
+    falseLabel: str
+    style: str
+
+
+class EmailFieldConfig(TypedDict, total=False):
+    confirmEmail: bool
+
+
+class DateFieldConfig(TypedDict, total=False):
+    minDate: str
+    maxDate: str
+    format: str
+
+
+FieldTypeLiteral = Literal[
+    "text",
+    "number",
+    "textarea",
+    "dropdown",
+    "radio",
+    "checkbox",
+    "rating",
+    "boolean",
+    "email",
+    "date",
+]
+
+
+FieldConfig = (
+    TextFieldConfig
+    | NumberFieldConfig
+    | TextareaFieldConfig
+    | DropdownFieldConfig
+    | RadioFieldConfig
+    | CheckboxFieldConfig
+    | RatingFieldConfig
+    | BooleanFieldConfig
+    | EmailFieldConfig
+    | DateFieldConfig
+)
 
 
 class FieldSchema(TypedDict):

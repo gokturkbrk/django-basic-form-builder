@@ -91,7 +91,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - Complete README with installation, usage, and API documentation
-- Field attribute matrix showing all config options per type
+- Field attribute matrix showing all config options per type (updated to cover every field)
 - Label vs Question usage guide
 - Quick start guide with step-by-step examples
 - JSON schema contract documentation
