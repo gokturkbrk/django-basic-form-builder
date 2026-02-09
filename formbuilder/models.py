@@ -5,7 +5,7 @@ from numbers import Number
 from typing import Any
 
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
 
@@ -35,9 +35,10 @@ class CustomForm(models.Model):
     def save(self, *args: Any, **kwargs: Any) -> None:
         update_schema = kwargs.pop("update_schema", True)
         self.full_clean()
-        super().save(*args, **kwargs)
-        if update_schema:
-            self.generate_schema(commit=True)
+        with transaction.atomic():
+            super().save(*args, **kwargs)
+            if update_schema:
+                self.generate_schema(commit=True)
 
     def generate_schema(self, commit: bool = True) -> dict[str, Any]:
         from .services.schema_builder import SchemaBuilder
@@ -167,8 +168,9 @@ class FormField(models.Model):
         if self.config is None:
             self.config = {}
         self.full_clean()
-        super().save(*args, **kwargs)
-        self.custom_form.generate_schema(commit=True)
+        with transaction.atomic():
+            super().save(*args, **kwargs)
+            self.custom_form.generate_schema(commit=True)
 
     def delete(self, *args: Any, **kwargs: Any) -> None:  # pragma: no cover - trivial
         custom_form = self.custom_form
@@ -355,6 +357,7 @@ class FieldOption(models.Model):
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         self.full_clean()
-        super().save(*args, **kwargs)
-        # Regenerate schema when options change
-        self.field.custom_form.generate_schema(commit=True)
+        with transaction.atomic():
+            super().save(*args, **kwargs)
+            # Regenerate schema when options change
+            self.field.custom_form.generate_schema(commit=True)
