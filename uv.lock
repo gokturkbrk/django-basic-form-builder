@@ -118,7 +118,7 @@ wheels = [
 ]
 
 [[package]]
-name = "django-formbuilder"
+name = "django-basic-form-builder"
 version = "0.1.2"
 source = { editable = "." }
 dependencies = [
