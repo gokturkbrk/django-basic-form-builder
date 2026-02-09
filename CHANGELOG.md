@@ -5,6 +5,23 @@ All notable changes to django-formbuilder will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-02-09
+
+### Added
+
+- Project metadata URLs for PyPI (Homepage, Documentation, Source, Tracker).
+- Detailed `TypedDict` definitions for all field configuration types in `schema_types.py` (Radio, Checkbox, Rating, Boolean, Email, Date).
+
+### Changed
+
+- Moved `psycopg[binary]` (PostgreSQL) and `nh3` (HTML sanitization) to optional dependencies (`postgres` and `html` extras) to promote a leaner core package associated with `django-formbuilder`.
+- Refactored `CustomForm`, `FormField`, and `FieldOption` save methods to use `transaction.atomic()`, ensuring consistent schema generation and data integrity.
+- Modernized `FieldConfig` type definition to use Python 3.10+ `|` union syntax.
+
+### Fixed
+
+- Resolved `NameError` issues in `schema_types.py` by removing unused imports and updating type syntax.
+
 ## [0.1.0] - 2026-02-09
 
 ### Added
