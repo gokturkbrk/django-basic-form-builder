@@ -7,7 +7,174 @@
             "slug": "contact-demo",
             "description": "Demo form shipped with django-formbuilder showcasing all field types",
             "status": "published",
-            "json_schema": {},
+            "json_schema": {
+                "form": {
+                    "name": "Contact Demo",
+                    "slug": "contact-demo",
+                    "description": "Demo form shipped with django-formbuilder showcasing all field types",
+                    "status": "published"
+                },
+                "fields": [
+                    {
+                        "id": "full_name",
+                        "type": "text",
+                        "label": "Full Name",
+                        "question": "What is your full name?",
+                        "required": true,
+                        "helpText": "As shown on your ID",
+                        "placeholder": "Jane Doe",
+                        "defaultValue": null,
+                        "position": 1,
+                        "config": {
+                            "minLength": 2,
+                            "maxLength": 120,
+                            "inputMode": "text"
+                        }
+                    },
+                    {
+                        "id": "email",
+                        "type": "email",
+                        "label": "Email",
+                        "question": "What is your email address? We'll use this to send you updates.",
+                        "required": true,
+                        "helpText": "We will never share your email",
+                        "placeholder": "jane@example.com",
+                        "defaultValue": null,
+                        "position": 2,
+                        "config": {}
+                    },
+                    {
+                        "id": "age",
+                        "type": "number",
+                        "label": "Age",
+                        "question": "How old are you?",
+                        "required": false,
+                        "helpText": "Optional",
+                        "placeholder": "25",
+                        "defaultValue": null,
+                        "position": 3,
+                        "config": {
+                            "min": 0,
+                            "max": 120,
+                            "step": 1
+                        }
+                    },
+                    {
+                        "id": "department",
+                        "type": "dropdown",
+                        "label": "Department",
+                        "question": "Which department would you like to contact?",
+                        "required": true,
+                        "helpText": "Select the relevant department",
+                        "placeholder": "Choose department",
+                        "defaultValue": null,
+                        "position": 4,
+                        "config": {
+                            "options": [
+                                {"value": "sales", "label": "Sales Team", "isDefault": false},
+                                {"value": "support", "label": "Customer Support", "isDefault": true},
+                                {"value": "billing", "label": "Billing Department", "isDefault": false}
+                            ],
+                            "defaultOption": "support"
+                        }
+                    },
+                    {
+                        "id": "contact_method",
+                        "type": "radio",
+                        "label": "Contact Method",
+                        "question": "How would you prefer to be contacted?",
+                        "required": true,
+                        "helpText": "Select one option",
+                        "placeholder": null,
+                        "defaultValue": null,
+                        "position": 5,
+                        "config": {
+                            "options": [
+                                {"value": "email", "label": "Email", "isDefault": true},
+                                {"value": "phone", "label": "Phone Call", "isDefault": false},
+                                {"value": "text", "label": "Text Message", "isDefault": false}
+                            ],
+                            "defaultOption": "email"
+                        }
+                    },
+                    {
+                        "id": "interests",
+                        "type": "checkbox",
+                        "label": "Interests",
+                        "question": "What topics are you interested in? (Select all that apply)",
+                        "required": false,
+                        "helpText": "Choose one or more",
+                        "placeholder": null,
+                        "defaultValue": null,
+                        "position": 6,
+                        "config": {
+                            "options": [
+                                {"value": "products", "label": "Product Updates", "isDefault": false},
+                                {"value": "news", "label": "Company News", "isDefault": false},
+                                {"value": "events", "label": "Events & Webinars", "isDefault": false}
+                            ]
+                        }
+                    },
+                    {
+                        "id": "service_rating",
+                        "type": "rating",
+                        "label": "Service Rating",
+                        "question": "How would you rate our service?",
+                        "required": true,
+                        "helpText": "1 star = Poor, 5 stars = Excellent",
+                        "placeholder": null,
+                        "defaultValue": null,
+                        "position": 7,
+                        "config": {
+                            "scale": 5,
+                            "style": "stars"
+                        }
+                    },
+                    {
+                        "id": "subscribe",
+                        "type": "boolean",
+                        "label": "Subscribe",
+                        "question": "Would you like to subscribe to our newsletter?",
+                        "required": false,
+                        "helpText": "You can unsubscribe at any time",
+                        "placeholder": null,
+                        "defaultValue": null,
+                        "position": 8,
+                        "config": {
+                            "trueLabel": "Yes, subscribe me",
+                            "falseLabel": "No, thanks"
+                        }
+                    },
+                    {
+                        "id": "preferred_date",
+                        "type": "date",
+                        "label": "Preferred Date",
+                        "question": "When would you like us to contact you?",
+                        "required": false,
+                        "helpText": "Select a date",
+                        "placeholder": null,
+                        "defaultValue": null,
+                        "position": 9,
+                        "config": {}
+                    },
+                    {
+                        "id": "message",
+                        "type": "textarea",
+                        "label": "Message",
+                        "question": "Tell us more about your inquiry",
+                        "required": true,
+                        "helpText": "Please provide details",
+                        "placeholder": "Type your message here...",
+                        "defaultValue": null,
+                        "position": 10,
+                        "config": {
+                            "rows": 5,
+                            "minLength": 10,
+                            "maxLength": 1000
+                        }
+                    }
+                ]
+            },
             "created_at": "2025-01-01T00:00:00Z",
             "updated_at": "2025-01-01T00:00:00Z"
         }
