@@ -8,6 +8,22 @@ authors = [
     { name = "Göktürk Burak Köse", email = "02macaw.others@icloud.com" }
 ]
 license = "MIT"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+keywords = ["django", "forms", "builder", "json", "admin", "schema"]
 urls = { Homepage = "https://github.com/gokturkbrk/django-basic-form-builder", Documentation = "https://github.com/gokturkbrk/django-basic-form-builder", Source = "https://github.com/gokturkbrk/django-basic-form-builder", Tracker = "https://github.com/gokturkbrk/django-basic-form-builder/issues" }
 dependencies = [
     "django>=5.1,<5.2",
