@@ -101,8 +101,8 @@ INSTALLED_APPS = [
 ### Optional Settings
 
 ```python
-# Disable API endpoint globally (default: True)
-FORMBUILDER_API_ENABLED = False
+# Enable the read-only API endpoint (disabled by default)
+FORMBUILDER_API_ENABLED = True
 ```
 
 ### URL Configuration

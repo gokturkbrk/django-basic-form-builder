@@ -11,7 +11,13 @@ Reusable Django app that lets admins define JSON-rendered forms directly in the 
    ```
 
 2. Add `formbuilder` (and `rest_framework` if not already present) to `INSTALLED_APPS`.
-3. Include the API URLs in your project routes:
+3. Explicitly enable the read-only API endpoint (it is off by default to avoid exposing form data unintentionally):
+
+   ```python
+   FORMBUILDER_API_ENABLED = True
+   ```
+
+4. Include the API URLs in your project routes:
 
    ```python
    from django.urls import include, path
@@ -21,7 +27,7 @@ Reusable Django app that lets admins define JSON-rendered forms directly in the 
    ]
    ```
 
-4. Run migrations (`python manage.py migrate`).
+5. Run migrations (`python manage.py migrate`).
 
 ## Admin Usage
 
@@ -245,7 +251,7 @@ pre-commit install
 
 ## Feature Flag
 
-Toggle the read-only API via the `FORMBUILDER_API_ENABLED` setting (True by default). When `False`, `/api/forms/<slug>/` returns 404 regardless of form status.
+Toggle the read-only API via the `FORMBUILDER_API_ENABLED` setting. The API is disabled unless you explicitly set `FORMBUILDER_API_ENABLED = True`; when left `False`, `/api/forms/<slug>/` returns 404 regardless of form status.
 
 ## Compatibility Notes
 

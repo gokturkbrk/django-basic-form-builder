@@ -84,7 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Configuration
 
-- `FORMBUILDER_API_ENABLED`: Feature flag to enable/disable API (default: True)
+- `FORMBUILDER_API_ENABLED`: Feature flag to enable/disable API (default: False; opt-in by setting `FORMBUILDER_API_ENABLED = True`)
 - Automatic schema regeneration on form/field/option save
 - Unique constraints for slugs and positions per form
 
