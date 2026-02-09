@@ -8,12 +8,7 @@ authors = [
     { name = "Göktürk Burak Köse", email = "02macaw.others@icloud.com" }
 ]
 license = "MIT"
-project_urls = {
-    "Homepage" = "https://github.com/gokturkbrk/django-basic-form-builder",
-    "Documentation" = "https://github.com/gokturkbrk/django-basic-form-builder",
-    "Source" = "https://github.com/gokturkbrk/django-basic-form-builder",
-    "Tracker" = "https://github.com/gokturkbrk/django-basic-form-builder/issues",
-}
+urls = { Homepage = "https://github.com/gokturkbrk/django-basic-form-builder", Documentation = "https://github.com/gokturkbrk/django-basic-form-builder", Source = "https://github.com/gokturkbrk/django-basic-form-builder", Tracker = "https://github.com/gokturkbrk/django-basic-form-builder/issues" }
 dependencies = [
     "django>=5.1,<5.2",
     "djangorestframework>=3.15.0",
