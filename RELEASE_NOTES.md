@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is the initial release of django-formbuilder, a reusable Django app that enables dynamic form creation through the Django admin with JSON schema generation for frontend consumption.
+This is the initial release of django-basic-form-builder, a reusable Django app that enables dynamic form creation through the Django admin with JSON schema generation for frontend consumption.
 
 ## What's Completed ✅
 
@@ -116,7 +116,7 @@ urlpatterns = [
 ## Known Issues
 
 - Admin coverage is at 49% - most untested paths are UI-related admin methods that are difficult to test with Django's test client. Consider functional testing for full coverage.
-- Some model methods marked as "pragma: no cover" are trivial (delete, __str__)
+- Some model methods marked as "pragma: no cover" are trivial (delete, **str**)
 - Python 3.14 requires compatibility patch (automatically applied)
 
 ## Future Enhancements (Out of Scope for v0.1.0)
@@ -144,8 +144,8 @@ For issues, questions, or contributions, please refer to:
 
 ## Version Information
 
-- __Version__: 0.1.0
-- __Release Date__: February 9, 2026
-- __Django__: 5.1+
-- __DRF__: 3.15+
-- __Python__: 3.12+
+- **Version**: 0.1.0
+- **Release Date**: February 9, 2026
+- **Django**: 5.1+
+- **DRF**: 3.15+
+- **Python**: 3.12+

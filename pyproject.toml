@@ -1,6 +1,6 @@
 [project]
 name = "django-basic-form-builder"
-version = "0.1.2"
+version = "0.1.3"
 description = "Reusable Django app for building JSON-driven forms via the admin"
 requires-python = ">=3.12"
 readme = "README.md"

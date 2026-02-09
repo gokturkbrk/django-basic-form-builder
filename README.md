@@ -1,4 +1,4 @@
-# django-formbuilder
+# django-basic-form-builder
 
 Reusable Django app that lets admins define JSON-rendered forms directly in the Django admin, then expose them via a read-only API endpoint. Works with Django 5.1+, DRF 3.15+, and the dependency stack listed in `pyproject.toml`.
 
@@ -7,13 +7,12 @@ Reusable Django app that lets admins define JSON-rendered forms directly in the 
 1. Install with [uv](https://github.com/astral-sh/uv) (preferred) or pip:
 
    ```bash
-   uv pip install django-formbuilder
+   uv pip install django-basic-form-builder
    ```
 
    Optional extras:
-
-   - PostgreSQL support: `uv pip install "django-formbuilder[postgres]"`
-   - HTML sanitization utilities (if you integrate them yourself): `uv pip install "django-formbuilder[html]"`
+   - PostgreSQL support: `uv pip install "django-basic-form-builder[postgres]"`
+   - HTML sanitization utilities (if you integrate them yourself): `uv pip install "django-basic-form-builder[html]"`
 
 2. Add `formbuilder` (and `rest_framework` if not already present) to `INSTALLED_APPS`.
 3. Explicitly enable the read-only API endpoint (it is off by default to avoid exposing form data unintentionally):
@@ -211,18 +210,18 @@ Returned from `/api/forms/<slug>/` when the form status is `published`.
 
 ### Field Attribute Matrix
 
-| Field Type | Config Keys | Notes |
-| --- | --- | --- |
-| `text` | `minLength`, `maxLength`, `pattern`, `inputMode`, `prefix`, `suffix` | Single-line text input |
-| `number` | `min`, `max`, `step`, `prefix`, `suffix`, `unit` | Numeric input with validation |
-| `textarea` | `rows`, `minLength`, `maxLength`, `autoResize` | Multi-line text input |
-| `dropdown` | `allowMultiple`, `allowOther`, `options`, `defaultOption` | Options managed via FieldOption model (inline editor) |
-| `radio` | `allowOther`, `options`, `defaultOption` | Single selection, options via FieldOption model |
-| `checkbox` | `minSelections`, `maxSelections`, `allowOther`, `options`, `defaultOption` | Multiple selections, options via FieldOption model |
-| `rating` | `scale` (5 or 10), `style` (stars/numeric/emoji), `minLabel`, `maxLabel` | Rating scale input |
-| `boolean` | `trueLabel`, `falseLabel`, `style` | Yes/No or True/False |
-| `email` | `confirmEmail` | Email with validation |
-| `date` | `minDate`, `maxDate`, `format` | Date picker |
+| Field Type | Config Keys                                                                | Notes                                                 |
+| ---------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `text`     | `minLength`, `maxLength`, `pattern`, `inputMode`, `prefix`, `suffix`       | Single-line text input                                |
+| `number`   | `min`, `max`, `step`, `prefix`, `suffix`, `unit`                           | Numeric input with validation                         |
+| `textarea` | `rows`, `minLength`, `maxLength`, `autoResize`                             | Multi-line text input                                 |
+| `dropdown` | `allowMultiple`, `allowOther`, `options`, `defaultOption`                  | Options managed via FieldOption model (inline editor) |
+| `radio`    | `allowOther`, `options`, `defaultOption`                                   | Single selection, options via FieldOption model       |
+| `checkbox` | `minSelections`, `maxSelections`, `allowOther`, `options`, `defaultOption` | Multiple selections, options via FieldOption model    |
+| `rating`   | `scale` (5 or 10), `style` (stars/numeric/emoji), `minLabel`, `maxLabel`   | Rating scale input                                    |
+| `boolean`  | `trueLabel`, `falseLabel`, `style`                                         | Yes/No or True/False                                  |
+| `email`    | `confirmEmail`                                                             | Email with validation                                 |
+| `date`     | `minDate`, `maxDate`, `format`                                             | Date picker                                           |
 
 ## Sample Fixture
 

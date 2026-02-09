@@ -1,4 +1,4 @@
-"""Compatibility shims to keep django-formbuilder stable across Python releases."""
+"""Compatibility shims to keep django-basic-form-builder stable across Python releases."""
 
 from __future__ import annotations
 

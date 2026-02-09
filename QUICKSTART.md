@@ -1,8 +1,8 @@
 # Quick Start Guide
 
-This guide helps you get started with django-formbuilder development or integration.
+This guide helps you get started with django-basic-form-builder development or integration.
 
-## For Developers (Contributing to django-formbuilder)
+## For Developers (Contributing to django-basic-form-builder)
 
 ### Initial Setup
 
@@ -81,16 +81,16 @@ uv run python manage.py shell -c "from formbuilder.models import CustomForm; Cus
 curl http://localhost:8000/api/forms/contact-demo/
 ```
 
-## For Integrators (Using django-formbuilder in your project)
+## For Integrators (Using django-basic-form-builder in your project)
 
 ### Installation
 
 1. **Install the package:**
 
    ```bash
-   uv pip install django-formbuilder
+   uv pip install django-basic-form-builder
    # or
-   pip install django-formbuilder
+   pip install django-basic-form-builder
    ```
 
 2. **Add to INSTALLED_APPS** in `settings.py`:
@@ -152,19 +152,19 @@ curl http://localhost:8000/api/forms/contact-demo/
 
 ```javascript
 // Fetch form schema
-const response = await fetch('/api/forms/contact-form/');
+const response = await fetch("/api/forms/contact-form/");
 const formData = await response.json();
 
 // formData.form contains form metadata
 // formData.fields contains array of field definitions
 
 // Render fields dynamically based on field type
-formData.fields.forEach(field => {
-  switch(field.type) {
-    case 'text':
+formData.fields.forEach((field) => {
+  switch (field.type) {
+    case "text":
       // Render text input
       break;
-    case 'dropdown':
+    case "dropdown":
       // Render select with field.config.options
       break;
     // ... handle other types
@@ -207,7 +207,7 @@ python -m build
 ### Check Package Contents
 
 ```bash
-tar tzf dist/django-formbuilder-*.tar.gz
+tar tzf dist/django-basic-form-builder-*.tar.gz
 ```
 
 ## Troubleshooting
