@@ -5,7 +5,7 @@ description = "Reusable Django app for building JSON-driven forms via the admin"
 requires-python = ">=3.12"
 readme = "README.md"
 authors = [
-    { name = "Göktürk Burak Köse", email = "[EMAIL_ADDRESS]" }
+    { name = "Göktürk Burak Köse", email = "02macaw.others@icloud.com" }
 ]
 license = "MIT"
 dependencies = [
