@@ -101,9 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Django >= 5.1, < 5.2
 - djangorestframework >= 3.15.0
-- psycopg[binary] >= 3.2.0
-- nh3 >= 0.3.2 (HTML sanitization)
 - drf-spectacular >= 0.29.0 (API documentation)
+- Optional extras: `postgres` installs psycopg[binary]>=3.2.0, `html` installs nh3>=0.3.2
 
 ### Development Dependencies
 

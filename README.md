@@ -10,6 +10,11 @@ Reusable Django app that lets admins define JSON-rendered forms directly in the 
    uv pip install django-formbuilder
    ```
 
+   Optional extras:
+
+   - PostgreSQL support: `uv pip install "django-formbuilder[postgres]"`
+   - HTML sanitization utilities (if you integrate them yourself): `uv pip install "django-formbuilder[html]"`
+
 2. Add `formbuilder` (and `rest_framework` if not already present) to `INSTALLED_APPS`.
 3. Explicitly enable the read-only API endpoint (it is off by default to avoid exposing form data unintentionally):
 
