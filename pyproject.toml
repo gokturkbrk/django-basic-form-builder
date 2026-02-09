@@ -1,5 +1,5 @@
 [project]
-name = "django-formbuilder"
+name = "django-basic-form-builder"
 version = "0.1.2"
 description = "Reusable Django app for building JSON-driven forms via the admin"
 requires-python = ">=3.12"
