@@ -350,7 +350,14 @@ class FormField(models.Model):
 
 
 class FieldOption(models.Model):
-    """Options for dropdown, radio, and checkbox fields"""
+    """Options for dropdown, radio, and checkbox fields.
+
+    Note: The single-default invariant for radio/dropdown fields is enforced in
+    ``clean()``, which is called by ``save()`` via ``full_clean()``. Code paths
+    that bypass ``save()`` (e.g. ``bulk_create``, raw SQL, or ``update()``)
+    will NOT enforce this constraint. Always use ``save()`` or call
+    ``full_clean()`` explicitly when creating or updating options.
+    """
 
     field = models.ForeignKey(
         FormField,

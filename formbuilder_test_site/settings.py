@@ -1,3 +1,7 @@
+# ⚠️  WARNING: This settings file is for LOCAL DEVELOPMENT / CI TESTING ONLY.
+# Do NOT copy these settings into a production deployment. The SECRET_KEY is
+# hardcoded, DEBUG is enabled, and API access is configured for anonymous use.
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
