@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import datetime
+import re
 from collections.abc import Iterable
 from numbers import Number
 from typing import Any
@@ -195,6 +197,14 @@ class FormField(models.Model):
         for key, allowed_types in self.FIELD_CONFIG_SCHEMA.get(self.field_type, {}).items():
             if key not in config:
                 continue
+            # Reject bool for non-bool fields (bool is a subclass of int)
+            if isinstance(config[key], bool) and bool not in allowed_types:
+                raise ValidationError(
+                    {
+                        "config": _("%(key)s must not be a boolean.")
+                        % {"key": key}
+                    }
+                )
             if not isinstance(config[key], tuple(allowed_types)):
                 raise ValidationError(
                     {
@@ -210,6 +220,7 @@ class FormField(models.Model):
         config = self.config or {}
         if self.field_type == self.FieldType.TEXT:
             self._ensure_min_max_relationship(config, "minLength", "maxLength")
+            self._validate_regex_pattern(config)
         elif self.field_type == self.FieldType.NUMBER:
             self._validate_numeric_config(config)
         elif self.field_type == self.FieldType.TEXTAREA:
@@ -271,13 +282,50 @@ class FormField(models.Model):
                 {"config": _("Rating style must be one of: stars, numeric, emoji.")}
             )
 
+    _MAX_REGEX_LENGTH = 500
+
+    def _validate_regex_pattern(self, config: dict[str, Any]) -> None:
+        pattern = config.get("pattern")
+        if not pattern:
+            return
+        if len(pattern) > self._MAX_REGEX_LENGTH:
+            raise ValidationError(
+                {"config": _("pattern is too long (max %(max)d characters).") % {"max": self._MAX_REGEX_LENGTH}}
+            )
+        try:
+            re.compile(pattern)
+        except re.error as exc:
+            raise ValidationError(
+                {"config": _("pattern is not a valid regex: %(err)s") % {"err": str(exc)}}
+            ) from exc
+
+    ALLOWED_DATE_FORMATS = frozenset({"YYYY-MM-DD", "DD/MM/YYYY", "MM/DD/YYYY", "DD.MM.YYYY"})
+
     def _validate_date_config(self, config: dict[str, Any]) -> None:
-        min_date = config.get("minDate")
-        max_date = config.get("maxDate")
-        # Basic validation - actual date parsing would happen in frontend/submission
-        if min_date and max_date:
-            # Could add date comparison if needed
-            pass
+        for key in ("minDate", "maxDate"):
+            value = config.get(key)
+            if value:
+                try:
+                    datetime.date.fromisoformat(value)
+                except (ValueError, TypeError) as exc:
+                    raise ValidationError(
+                        {"config": _("%(key)s must be a valid ISO date (YYYY-MM-DD).") % {"key": key}}
+                    ) from exc
+
+        fmt = config.get("format")
+        if fmt and fmt not in self.ALLOWED_DATE_FORMATS:
+            raise ValidationError(
+                {
+                    "config": _("format must be one of: %(formats)s")
+                    % {"formats": ", ".join(sorted(self.ALLOWED_DATE_FORMATS))}
+                }
+            )
+
+        min_date_str = config.get("minDate")
+        max_date_str = config.get("maxDate")
+        if min_date_str and max_date_str:
+            if datetime.date.fromisoformat(min_date_str) > datetime.date.fromisoformat(max_date_str):
+                raise ValidationError({"config": _("minDate cannot be after maxDate.")})
 
     def _validate_dropdown_config(self, config: dict[str, Any]) -> None:
         """Legacy method - kept for backward compatibility with old config-based options"""

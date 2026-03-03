@@ -258,3 +258,125 @@ def test_dropdown_cannot_have_multiple_defaults(custom_form: CustomForm):
 
     assert "is_default" in exc_info.value.error_dict
     assert "Only one default option is allowed for this field." in str(exc_info.value)
+
+
+# -- Validation hardening regression tests (Finding 3) --
+
+
+@pytest.mark.parametrize(
+    "field_type, config",
+    [
+        (FormField.FieldType.TEXT, {"minLength": True}),
+        (FormField.FieldType.TEXT, {"maxLength": True}),
+        (FormField.FieldType.TEXTAREA, {"rows": True}),
+        (FormField.FieldType.NUMBER, {"step": True}),
+        (FormField.FieldType.CHECKBOX, {"minSelections": True}),
+        (FormField.FieldType.RATING, {"scale": True}),
+    ],
+)
+def test_boolean_rejected_for_numeric_fields(custom_form: CustomForm, field_type, config):
+    """bool values must not pass validation for integer/numeric config keys."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Test",
+        slug="test-bool",
+        field_type=field_type,
+        position=1,
+        config=config,
+    )
+    with pytest.raises(ValidationError) as exc_info:
+        field.full_clean()
+    assert "must not be a boolean" in str(exc_info.value)
+
+
+def test_invalid_regex_pattern_rejected(custom_form: CustomForm):
+    """Malformed regex patterns must be rejected."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Name",
+        slug="name",
+        field_type=FormField.FieldType.TEXT,
+        position=1,
+        config={"pattern": "([a-z+"},
+    )
+    with pytest.raises(ValidationError) as exc_info:
+        field.full_clean()
+    assert "not a valid regex" in str(exc_info.value)
+
+
+def test_regex_pattern_too_long_rejected(custom_form: CustomForm):
+    """Regex patterns exceeding max length must be rejected."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Name",
+        slug="name",
+        field_type=FormField.FieldType.TEXT,
+        position=1,
+        config={"pattern": "a" * 501},
+    )
+    with pytest.raises(ValidationError) as exc_info:
+        field.full_clean()
+    assert "too long" in str(exc_info.value)
+
+
+def test_valid_regex_pattern_accepted(custom_form: CustomForm):
+    """A valid regex pattern should pass validation."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Name",
+        slug="name",
+        field_type=FormField.FieldType.TEXT,
+        position=1,
+        config={"pattern": "^[a-zA-Z]+$"},
+    )
+    field.full_clean()
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        {"minDate": "not-a-date"},
+        {"maxDate": "2020-99-99"},
+        {"format": "%Q"},
+    ],
+)
+def test_invalid_date_config_rejected(custom_form: CustomForm, config):
+    """Invalid date strings and unsupported formats must be rejected."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Birthday",
+        slug="birthday",
+        field_type=FormField.FieldType.DATE,
+        position=1,
+        config=config,
+    )
+    with pytest.raises(ValidationError):
+        field.full_clean()
+
+
+def test_min_date_after_max_date_rejected(custom_form: CustomForm):
+    """minDate after maxDate must be rejected."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Birthday",
+        slug="birthday",
+        field_type=FormField.FieldType.DATE,
+        position=1,
+        config={"minDate": "2025-12-31", "maxDate": "2025-01-01"},
+    )
+    with pytest.raises(ValidationError) as exc_info:
+        field.full_clean()
+    assert "minDate cannot be after maxDate" in str(exc_info.value)
+
+
+def test_valid_date_config_accepted(custom_form: CustomForm):
+    """Valid date config should pass validation."""
+    field = FormField(
+        custom_form=custom_form,
+        label="Birthday",
+        slug="birthday",
+        field_type=FormField.FieldType.DATE,
+        position=1,
+        config={"minDate": "2025-01-01", "maxDate": "2025-12-31", "format": "YYYY-MM-DD"},
+    )
+    field.full_clean()
