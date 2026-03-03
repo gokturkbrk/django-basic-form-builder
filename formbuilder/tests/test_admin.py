@@ -52,3 +52,29 @@ def test_preview_view_returns_json(custom_form: CustomForm, db):
 
     assert response.status_code == 200
     assert response.json()["fields"][0]["id"] == "email"
+
+
+def test_preview_view_forbidden_without_view_permission(custom_form: CustomForm, db):
+    """Staff user without view_customform permission should get 403."""
+    FormField.objects.create(
+        custom_form=custom_form,
+        label="Email",
+        slug="email",
+        field_type=FormField.FieldType.TEXT,
+        position=1,
+        required=True,
+        config={"inputMode": "email"},
+    )
+    custom_form.refresh_from_db()
+
+    user_model = auth.get_user_model()
+    user_model.objects.create_user(
+        username="staffuser", email="staff@example.com", password="pass", is_staff=True
+    )
+    client = Client()
+    assert client.login(username="staffuser", password="pass")
+
+    url = reverse("admin:formbuilder_customform_preview", args=[custom_form.pk])
+    response = client.get(url)
+
+    assert response.status_code == 403

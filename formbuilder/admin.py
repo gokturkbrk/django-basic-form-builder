@@ -4,7 +4,7 @@ import contextlib
 
 from django import forms
 from django.contrib import admin
-from django.core.exceptions import ValidationError
+from django.core.exceptions import PermissionDenied, ValidationError
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import path, reverse
@@ -298,6 +298,8 @@ class CustomFormAdmin(admin.ModelAdmin):
 
     def preview_view(self, request, pk, *args, **kwargs):
         custom_form = get_object_or_404(CustomForm, pk=pk)
+        if not self.has_view_permission(request, custom_form):
+            raise PermissionDenied
         if not custom_form.json_schema:
             custom_form.generate_schema(commit=True)
         return JsonResponse(custom_form.json_schema)
