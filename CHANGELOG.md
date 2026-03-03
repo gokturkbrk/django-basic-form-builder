@@ -5,6 +5,22 @@ All notable changes to django-basic-form-builder will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-03-03
+
+### Security
+
+- **High**: Enforced `has_view_permission()` model-level checks within the `preview_view` endpoint to prevent low-privileged staff accounts from viewing draft form definitions.
+- **Medium**: Removed hardcoded `authentication_classes = []` and `permission_classes = []` on the public API endpoint (`FormSchemaView`). The API now respects the host-project's defaults unless `FORMBUILDER_API_ANONYMOUS = True` is set.
+- **Medium**: Tightened permissive schema configuration validation to prevent misinterpretation or Denial-of-Service attacks in downstream consumers.
+  - Rejected booleans for integer/numeric config fields since `bool` is a subclass of `int`.
+  - Enforced a 500-character max length on regex patterns and validated compilation with `re.compile()`.
+  - Added full ISO parsing for `minDate`/`maxDate` and strict format whitelisting for dates.
+
+### Documentation
+
+- Added a warning note about `bulk_create` caveats in relation to single-default invariants within the `FieldOption` model.
+- Further clarified the test site `settings.py` usage constraints.
+
 ## [0.1.3] - 2026-02-09
 
 ### Changed

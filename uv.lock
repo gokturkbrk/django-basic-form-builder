@@ -119,7 +119,7 @@ wheels = [
 
 [[package]]
 name = "django-basic-form-builder"
-version = "0.1.3"
+version = "0.1.4"
 source = { editable = "." }
 dependencies = [
     { name = "django" },

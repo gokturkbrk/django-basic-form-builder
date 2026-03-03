@@ -1,10 +1,23 @@
-# Release Notes - v0.1.0
+# Release Notes
 
-## Overview
+## v0.1.4 - 2026-03-03
 
-This is the initial release of django-basic-form-builder, a reusable Django app that enables dynamic form creation through the Django admin with JSON schema generation for frontend consumption.
+### Overview
 
-## What's Completed ✅
+Version 0.1.4 is a critical security-focused patch release addressing vulnerabilities identified in the 2026-03-03 security review. It enforces strict model-level permissions for admin preview endpoints, respects application-level API configurations by default, and implements comprehensive schema type validation and compilation to secure applications against arbitrary or malformed input payloads.
+
+### What's Changed ✅
+
+- Enforced permission checks (`has_view_permission()`) on the admin `preview_view` endpoint.
+- Handled API endpoint access dynamically using DRF's default configurations. Restored via `FORMBUILDER_API_ANONYMOUS = True` if required.
+- Implemented tight restriction on Boolean conversions for integer/numeric types within `models.py` configuration validations.
+- Explicit Regex compilation with `re.compile()` and a 500-character upper ceiling constraint to prevent ReDoS payloads.
+- Added strict format options and verified parsing logic for `minDate`/`maxDate` in configurations.
+- Improved documentation with `FieldOption` model warnings about bulk operations and updated the `formbuilder_test_site` environments.
+
+## v0.1.0 - Initial Release
+
+### Overview
 
 ### Core Features
 
@@ -144,8 +157,8 @@ For issues, questions, or contributions, please refer to:
 
 ## Version Information
 
-- **Version**: 0.1.0
-- **Release Date**: February 9, 2026
+- **Latest Version**: 0.1.4
+- **Release Date**: March 3, 2026
 - **Django**: 5.1+
 - **DRF**: 3.15+
 - **Python**: 3.12+
