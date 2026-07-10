@@ -7,4 +7,4 @@ include RELEASE_NOTES.md
 include pyproject.toml
 
 recursive-include formbuilder/static *
-recursive-include formbuilder/templates *
+recursive-include formbuilder/fixtures *.json

@@ -1,6 +1,6 @@
 # django-basic-form-builder
 
-Reusable Django app that lets admins define JSON-rendered forms directly in the Django admin, then expose them via a read-only API endpoint. Works with Django 5.1+, DRF 3.15+, and the dependency stack listed in `pyproject.toml`.
+Reusable Django app that lets admins define JSON-rendered forms directly in the Django admin, then expose them via a read-only API endpoint. Works with Django 5.1 and 5.2, DRF 3.15+, and the dependency stack listed in `pyproject.toml`.
 
 ## Installation
 
@@ -259,4 +259,4 @@ Toggle the read-only API via the `FORMBUILDER_API_ENABLED` setting. The API is d
 
 ## Compatibility Notes
 
-- Django 5.1 on Python 3.14 has a known bug in `django.template.context.BaseContext.__copy__`. This package patches the method at import time so admin pages continue to work. No action is required from host projects besides including `formbuilder` in `INSTALLED_APPS`.
+- A compatibility shim patches `django.template.context.BaseContext.__copy__` at import time so admin pages continue to work across supported Python and Django 5.x combinations. No action is required from host projects besides including `formbuilder` in `INSTALLED_APPS`.

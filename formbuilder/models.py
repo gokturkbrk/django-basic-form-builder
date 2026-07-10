@@ -3,12 +3,22 @@ from __future__ import annotations
 import datetime
 import re
 from collections.abc import Iterable
-from numbers import Number
-from typing import Any
+from typing import TYPE_CHECKING, Any, Protocol
 
 from django.core.exceptions import ValidationError
 from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
+
+from .schema_types import FormSchema
+
+if TYPE_CHECKING:
+    class _FieldOptionQuerySet(Protocol):
+        def filter(self, **kwargs: Any) -> _FieldOptionQuerySet: ...
+        def exists(self) -> bool: ...
+
+    class _FieldOptionManager(Protocol):
+        def exclude(self, **kwargs: Any) -> _FieldOptionQuerySet: ...
+
 
 
 class CustomForm(models.Model):
@@ -42,7 +52,7 @@ class CustomForm(models.Model):
             if update_schema:
                 self.generate_schema(commit=True)
 
-    def generate_schema(self, commit: bool = True) -> dict[str, Any]:
+    def generate_schema(self, commit: bool = True) -> FormSchema:
         from .services.schema_builder import SchemaBuilder
 
         schema = SchemaBuilder().build(self)
@@ -75,9 +85,9 @@ class FormField(models.Model):
             "suffix": (str,),
         },
         FieldType.NUMBER: {
-            "min": (int, float, Number),
-            "max": (int, float, Number),
-            "step": (int, float, Number),
+            "min": (int, float),
+            "max": (int, float),
+            "step": (int, float),
             "prefix": (str,),
             "suffix": (str,),
             "unit": (str,),
@@ -141,6 +151,9 @@ class FormField(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    if TYPE_CHECKING:
+        options: _FieldOptionManager
+
     class Meta:
         ordering = ("position", "id")
         constraints = [
@@ -156,6 +169,9 @@ class FormField(models.Model):
 
     def __str__(self) -> str:  # pragma: no cover - trivial
         return f"{self.label} ({self.custom_form.slug})"
+
+    def get_field_type_display(self) -> str:
+        return str(dict(self.FieldType.choices).get(self.field_type, self.field_type))
 
     def clean(self) -> None:
         super().clean()
@@ -174,10 +190,11 @@ class FormField(models.Model):
             super().save(*args, **kwargs)
             self.custom_form.generate_schema(commit=True)
 
-    def delete(self, *args: Any, **kwargs: Any) -> None:  # pragma: no cover - trivial
+    def delete(self, *args: Any, **kwargs: Any) -> tuple[int, dict[str, int]]:
         custom_form = self.custom_form
-        super().delete(*args, **kwargs)
+        deleted = super().delete(*args, **kwargs)
         custom_form.generate_schema(commit=True)
+        return deleted
 
     def _validate_config_dict(self) -> None:
         config = self.config or {}
@@ -253,7 +270,7 @@ class FormField(models.Model):
         min_value = config.get("min")
         max_value = config.get("max")
         step = config.get("step")
-        if step is not None and isinstance(step, Number) and step <= 0:
+        if step is not None and isinstance(step, int | float) and step <= 0:
             raise ValidationError({"config": _("step must be greater than zero.")})
         if min_value is not None and max_value is not None and min_value > max_value:
             raise ValidationError({"config": _("min cannot be greater than max.")})
@@ -323,9 +340,12 @@ class FormField(models.Model):
 
         min_date_str = config.get("minDate")
         max_date_str = config.get("maxDate")
-        if min_date_str and max_date_str:
-            if datetime.date.fromisoformat(min_date_str) > datetime.date.fromisoformat(max_date_str):
-                raise ValidationError({"config": _("minDate cannot be after maxDate.")})
+        if (
+            min_date_str
+            and max_date_str
+            and datetime.date.fromisoformat(min_date_str) > datetime.date.fromisoformat(max_date_str)
+        ):
+            raise ValidationError({"config": _("minDate cannot be after maxDate.")})
 
     def _validate_dropdown_config(self, config: dict[str, Any]) -> None:
         """Legacy method - kept for backward compatibility with old config-based options"""

@@ -1,6 +1,6 @@
 [project]
 name = "django-basic-form-builder"
-version = "0.1.4"
+version = "0.1.5"
 description = "Reusable Django app for building JSON-driven forms via the admin"
 requires-python = ">=3.12"
 readme = "README.md"
@@ -13,6 +13,7 @@ classifiers = [
     "Environment :: Web Environment",
     "Framework :: Django",
     "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
@@ -26,7 +27,7 @@ classifiers = [
 keywords = ["django", "forms", "builder", "json", "admin", "schema"]
 urls = { Homepage = "https://github.com/gokturkbrk/django-basic-form-builder", Documentation = "https://github.com/gokturkbrk/django-basic-form-builder", Source = "https://github.com/gokturkbrk/django-basic-form-builder", Tracker = "https://github.com/gokturkbrk/django-basic-form-builder/issues" }
 dependencies = [
-    "django>=5.1,<5.2",
+    "django>=5.1,<6.0",
     "djangorestframework>=3.15.0",
     "drf-spectacular>=0.29.0",
 ]

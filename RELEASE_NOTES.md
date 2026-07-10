@@ -1,5 +1,11 @@
 # Release Notes
 
+## v0.1.5 - 2026-07-10
+
+### Django 5.2 Compatibility Release
+
+Version 0.1.5 adds Django 5.2 support while retaining Django 5.1 compatibility. The package metadata now allows Django `>=5.1,<6.0`, includes the Django 5.2 classifier, and the existing test suite has been verified against Django 5.2.16.
+
 ## v0.1.4 - 2026-03-03
 
 ### Overview
@@ -157,8 +163,8 @@ For issues, questions, or contributions, please refer to:
 
 ## Version Information
 
-- **Latest Version**: 0.1.4
-- **Release Date**: March 3, 2026
-- **Django**: 5.1+
+- **Latest Version**: 0.1.5
+- **Release Date**: July 10, 2026
+- **Django**: 5.1, 5.2
 - **DRF**: 3.15+
 - **Python**: 3.12+

@@ -5,6 +5,15 @@ All notable changes to django-basic-form-builder will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2026-07-10
+
+### Changed
+
+- Added Django 5.2 support by widening the Django dependency range to `>=5.1,<6.0`.
+- Added the `Framework :: Django :: 5.2` package classifier.
+- Cleaned up model type annotations for Pylance/Pyright compatibility.
+- Verified the existing test suite against Django 5.2.16.
+
 ## [0.1.4] - 2026-03-03
 
 ### Security
@@ -139,7 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Dependencies
 
-- Django >= 5.1, < 5.2
+- Django >= 5.1, < 6.0
 - djangorestframework >= 3.15.0
 - drf-spectacular >= 0.29.0 (API documentation)
 - Optional extras: `postgres` installs psycopg[binary]>=3.2.0, `html` installs nh3>=0.3.2
